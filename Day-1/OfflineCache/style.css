@@ -3,3 +3,17 @@
 		font-style: italic;
 		text-decoration: line-through;
 	}
+#divStatus{
+	position : absolute;
+	top : 0;
+	right : 0;
+	margin: 10px;
+	background-color: black;
+	color : yellow;
+	padding : 3px;
+	font-weight: bold;
+}
+
+#divUpdateReady{
+	display : none;
+}
