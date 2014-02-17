@@ -1,31 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Task Manager</title>
-	<style>
-	.completed {
-		color : red;
-		font-style: italic;
-		text-decoration: line-through;
-	}
-	</style>
-	<script>
-		/* Local Storage - Key value store
-			both key and value should be string
-			
-			exposed as window.localStorage
-				setItem(key,value)
-				value getItem(key)
-				removeItem(key)
-				key key(index)
-				clear()
-				length
-
-		*/
-	</script>
-	<script>
-	var txtTask,btnAdd,btnRemoveCompleted,ulTaskList;
+var txtTask,btnAdd,btnRemoveCompleted,ulTaskList;
 
 	window.addEventListener("DOMContentLoaded",init);
 	function init(){
@@ -63,31 +36,14 @@
 		ulTaskList.appendChild(newTaskItem);
 	}
 
-	function getTasksFromStorage(){
-		var tasks = [];
-		for(var i=0;i<localStorage.length;i++){
-			var key = localStorage.key(i);
-			var taskObj = JSON.parse(localStorage.getItem(key));
-			tasks.push(taskObj);
-		}
-		return tasks;
-	}
+	
 	function onBtnAddClick(){
 		var newTask = addTaskToStorage(txtTask.value);
 		addTaskToUI(newTask);
 		
 	}
 
-	function addTaskToStorage(taskName){
-		var newKey = new Date().getTime().toString();
-		var newTask = {
-			id : newKey,
-			name : taskName,
-			isCompleted : false
-		}
-		window.localStorage.setItem(newKey,JSON.stringify(newTask));
-		return newTask;
-	}
+	
 
 	function onBtnRemoveCompletedClick(){
 		var taskItems = ulTaskList.children;
@@ -100,29 +56,8 @@
 			}
 		}
 	}
-	function toggleStatusInStorage(key){
-		var taskObj = JSON.parse(localStorage.getItem(key));
-		taskObj.isCompleted = !taskObj.isCompleted;
-		localStorage.setItem(key,JSON.stringify(taskObj));
-	}
-	function removeTaskFromStorage(key){
-		localStorage.removeItem(key);
-	}
+	
 	function onTaskItemClick(){
 		toggleStatusInStorage(this.getAttribute("task-id"));
 		this.classList.toggle("completed");
 	}
-
-	</script>
-</head>
-<body>
-	<h1>Task Manager</h1>
-	<span>Task :</span>
-	<input type="text" name="" id="txtTask">
-	<input type="button" value="Add Task" id="btnAdd">
-	<input type="button" value="Remove Completed" id="btnRemoveCompleted">
-	<ul id="ulTaskList">
-		
-	</ul>
-</body>
-</html>
