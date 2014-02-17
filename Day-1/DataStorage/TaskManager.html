@@ -37,12 +37,20 @@
 
 		btnAdd.addEventListener("click",onBtnAddClick);
 		btnRemoveCompleted.addEventListener("click",onBtnRemoveCompletedClick);
+		window.addEventListener("storage",updateUI);
 		var tasks = getTasksFromStorage();
 		loadTasks(tasks);
 
+
+	}
+
+	function updateUI(){
+		var tasks = getTasksFromStorage();
+		loadTasks(tasks);
 	}
 
 	function loadTasks(tasks){
+		ulTaskList.innerHTML = "";
 		for(var i=0;i<tasks.length;i++)
 			addTaskToUI(tasks[i]);
 	}
